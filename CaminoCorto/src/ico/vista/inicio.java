@@ -5,9 +5,13 @@
  */
 package ico.vista;
 
+import ico.algoritmos.Dijkstra;
+import ico.elementos.Arista;
 import ico.elementos.Grafo;
+import ico.elementos.Vertice;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 
 
@@ -19,9 +23,12 @@ public class inicio extends javax.swing.JFrame {
     
     private DefaultComboBoxModel comboBoxInicio = new DefaultComboBoxModel();
     private DefaultComboBoxModel comboBoxFin = new DefaultComboBoxModel();
+    private DefaultComboBoxModel comboUbicInicial = new DefaultComboBoxModel();
+    private DefaultComboBoxModel comboUbicFinal = new DefaultComboBoxModel();
     private Grafo grafo = new Grafo();
     private boolean click = true;
-    
+    private Dijkstra algoritmo = new Dijkstra();
+            
     public inicio() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -58,6 +65,13 @@ public class inicio extends javax.swing.JFrame {
         comboBoxFinal = new javax.swing.JComboBox<>();
         botonNewArista = new javax.swing.JButton();
         botonCrearArista = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jPanelArista1 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        comboBoxUbicacionInicial = new javax.swing.JComboBox<>();
+        jLabel7 = new javax.swing.JLabel();
+        comboBoxubicacionFinal = new javax.swing.JComboBox<>();
+        botonCalculate = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -80,7 +94,7 @@ public class inicio extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 690, Short.MAX_VALUE)
+            .addGap(0, 688, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -202,7 +216,7 @@ public class inicio extends javax.swing.JFrame {
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(botonNewArista)
-                .addContainerGap(7, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         botonCrearArista.setText("Crear arista");
@@ -212,6 +226,66 @@ public class inicio extends javax.swing.JFrame {
             }
         });
 
+        jButton3.setText("Calcular mejor ruta");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jPanelArista1.setBorder(javax.swing.BorderFactory.createTitledBorder("Calcular mejor ruta"));
+
+        jLabel6.setText("Vertice inicial:");
+
+        comboBoxUbicacionInicial.setModel(this.comboUbicInicial);
+
+        jLabel7.setText("Vertice final:");
+
+        comboBoxubicacionFinal.setModel(this.comboUbicFinal);
+
+        botonCalculate.setText("Calcular");
+        botonCalculate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonCalculateActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanelArista1Layout = new javax.swing.GroupLayout(jPanelArista1);
+        jPanelArista1.setLayout(jPanelArista1Layout);
+        jPanelArista1Layout.setHorizontalGroup(
+            jPanelArista1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelArista1Layout.createSequentialGroup()
+                .addGroup(jPanelArista1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelArista1Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addGroup(jPanelArista1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(botonCalculate)))
+                    .addGroup(jPanelArista1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel7)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanelArista1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(comboBoxUbicacionInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboBoxubicacionFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21))
+        );
+        jPanelArista1Layout.setVerticalGroup(
+            jPanelArista1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelArista1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelArista1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(comboBoxUbicacionInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelArista1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(comboBoxubicacionFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(botonCalculate)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -219,26 +293,31 @@ public class inicio extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2)
+                        .addGap(26, 26, 26))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jPanelArista, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jPanelVertice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jPanelVertice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jPanelArista1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(13, 13, 13))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(55, 55, 55)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                                    .addComponent(botonCrearArista)
-                                    .addComponent(botonCrearVertice)))
+                                .addGap(101, 101, 101)
+                                .addComponent(botonCrearVertice))
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(60, 60, 60)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(103, 103, 103)
+                                .addComponent(botonCrearArista))
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(70, 70, 70)
-                                .addComponent(jButton2)))
+                                .addGap(83, 83, 83)
+                                .addComponent(jButton3)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -250,15 +329,22 @@ public class inicio extends javax.swing.JFrame {
                 .addComponent(botonCrearVertice, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelVertice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24)
+                .addGap(19, 19, 19)
                 .addComponent(botonCrearArista, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanelArista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 136, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addGap(23, 23, 23)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(70, 70, 70))
+                .addComponent(jPanelArista1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jButton2)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(23, 23, 23))))
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 706, Short.MAX_VALUE)
         );
 
@@ -314,6 +400,20 @@ public class inicio extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_botonNewAristaActionPerformed
 
+    private void botonCalculateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCalculateActionPerformed
+        ArrayList<Arista> caminoCorto = algoritmo.caminoMasCorto(grafo, (String)this.comboBoxUbicacionInicial.getSelectedItem(), (String)this.comboBoxubicacionFinal.getSelectedItem());
+        ///////Falta lo de enviar las lineas al jpanel.
+    }//GEN-LAST:event_botonCalculateActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        comboUbicInicial.addElement("Selecciona");
+        comboUbicFinal.addElement("Selecciona");
+        for (Vertice verti : grafo.getVertices()) {
+            comboUbicInicial.addElement(verti.getNombreV());
+            comboUbicFinal.addElement(verti.getNombreV());
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -356,22 +456,29 @@ public class inicio extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonCalculate;
     private javax.swing.JButton botonCrearArista;
     private javax.swing.JButton botonCrearVertice;
     private javax.swing.JButton botonNewArista;
     private javax.swing.JButton botonNewVertice;
     private javax.swing.JComboBox<String> comboBoxFinal;
     private javax.swing.JComboBox<String> comboBoxInicial;
+    private javax.swing.JComboBox<String> comboBoxUbicacionInicial;
+    private javax.swing.JComboBox<String> comboBoxubicacionFinal;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanelArista;
+    private javax.swing.JPanel jPanelArista1;
     private javax.swing.JPanel jPanelVertice;
     private javax.swing.JTextField jTextFieldCoordenadaX;
     private javax.swing.JTextField jTextFieldCoordenadaY;
