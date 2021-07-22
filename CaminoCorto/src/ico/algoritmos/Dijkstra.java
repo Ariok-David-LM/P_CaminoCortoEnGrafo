@@ -136,21 +136,18 @@ public class Dijkstra {
         ArrayList<Arista> camino = new ArrayList<>();
         String seleccionado = vertiF;
         int contador = 0;
-        do {
-            String seleccionado2 = null;
+        do {            
             for (Etiquetas etiq : eti) {
                 if (etiq.getVerticeActual().getNombreV().equals(seleccionado)) {
-                    for (Arista aristasTotale : aristasTotales) {
-                        if (aristasTotale.existeVertice(etiq.getVerticeActual().getNombreV()) && aristasTotale.existeVertice(etiq.getVerticeAnterior().getNombreV())) {
-                            camino.add(aristasTotale);
-                            seleccionado2 = etiq.getVerticeAnterior().getNombreV();
-                        }
-                    }
+                    Arista tmp = obtenerArista(aristasTotales, etiq.getVerticeActual().getNombreV(), etiq.getVerticeAnterior().getNombreV());
+                    camino.add(tmp);
+                    seleccionado = etiq.getVerticeAnterior().getNombreV();
                 }
             }
-            seleccionado = seleccionado2;
             contador = contador + 1;
-            System.out.println(contador);
+            if (seleccionado.equals(vertiI)) {
+                contador = 1000;
+            }
         } while (contador <= eti.size());
         return camino;
     }
@@ -158,8 +155,8 @@ public class Dijkstra {
     private Arista obtenerArista(ArrayList<Arista> arris, String ini, String fin){
         Arista arista = null;
         for (Arista arri : arris) {
-            if (true) {
-                
+            if (arri.existeVertice(ini) && arri.existeVertice(fin)) {
+                arista = arri;
             }
         }
         return arista;

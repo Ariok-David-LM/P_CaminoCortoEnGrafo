@@ -33,14 +33,14 @@ public class CaminoCorto {
 
         System.out.println("+++++++++++++++++++++++++++++++++++++++++++");
         
-        grafo.insertarArista("a","b",2);
-        grafo.insertarArista("a","c",3);
-        grafo.insertarArista("b","e",2);
-        grafo.insertarArista("d","b",5);
-        grafo.insertarArista("c","e",5);
-        grafo.insertarArista("d","e",1);
-        grafo.insertarArista("d","z",2);
-        grafo.insertarArista("e","z",4);
+        grafo.insertarArista("a","b");
+        grafo.insertarArista("a","c");
+        grafo.insertarArista("b","e");
+        grafo.insertarArista("d","b");
+        grafo.insertarArista("c","e");
+        grafo.insertarArista("d","e");
+        grafo.insertarArista("d","z");
+        grafo.insertarArista("e","z");
 
 
 
