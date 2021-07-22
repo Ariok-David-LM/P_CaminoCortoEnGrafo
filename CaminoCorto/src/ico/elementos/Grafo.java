@@ -64,7 +64,7 @@ public class Grafo {
         }
     }
     
-    public void insertarArista(String vertiIni, String vertiFin, float valorAri){/*++++++++++++++++++++*/
+    public void insertarArista(String vertiIni, String vertiFin){
         Vertice verticeInicial = null;
         Vertice verticeFinal = null;
         Arista aristaIncertar = null;
@@ -80,7 +80,7 @@ public class Grafo {
                 }
             }
             if (verticeInicial != null && verticeFinal != null) {
-                aristaIncertar = new Arista(verticeInicial, verticeFinal, valorAri);/*++++++++++++++*/
+                aristaIncertar = new Arista(verticeInicial, verticeFinal);
                 if (listaAristas.isEmpty()) {
                     this.listaAristas.add(aristaIncertar);
                     System.out.println("Se incerto el arista");
