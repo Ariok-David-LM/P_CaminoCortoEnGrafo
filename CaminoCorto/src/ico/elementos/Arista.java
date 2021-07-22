@@ -18,10 +18,10 @@ public class Arista {
     public Arista() {
     }
 
-    public Arista(Vertice verticeInicial, Vertice verticeFinal, float valorArista) {
+    public Arista(Vertice verticeInicial, Vertice verticeFinal) {
         this.verticeInicial = verticeInicial;
         this.verticeFinal = verticeFinal;
-        this.valorArista = valorArista;
+
     }
 
     public Vertice getVerticeInicial() {
@@ -41,11 +41,11 @@ public class Arista {
     }
 
     public float getValorArista() {
-        /*this.valorVertice = this.calcularValor();*/
+        this.valorArista = this.calcularValor();
         return valorArista;
     }
 
-    /*private float calcularValor(){
+    private float calcularValor(){
         int xs = verticeInicial.getEjex() - verticeFinal.getEjex();
         int ys = verticeInicial.getEjey() - verticeFinal.getEjey();
         int xs2 = (int) Math.pow(xs, 2);
@@ -53,7 +53,7 @@ public class Arista {
         int xs2ys2 = xs2 + ys2;
         float valor = (float) Math.sqrt(xs2ys2);
         return valor;
-    }*/
+    }
     
     public boolean existeVertice(String verti){
         boolean existe = false;
