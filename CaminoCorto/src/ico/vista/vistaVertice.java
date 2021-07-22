@@ -5,7 +5,9 @@
  */
 package ico.vista;
 
-import ico.elementos.Vertice;
+import ico.elementos.Grafo;
+
+
 
 /**
  *
@@ -13,7 +15,7 @@ import ico.elementos.Vertice;
  */
 public class vistaVertice extends javax.swing.JDialog {
 
-    private Vertice vertice = null;
+    private Grafo grafo = null;
 
     /**
      * Creates new form vistaVertice
@@ -113,9 +115,16 @@ public class vistaVertice extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonNuevoActionPerformed
-        vertice = new Vertice(Integer.parseInt(jTextFieldCoorX.getText()), Integer.parseInt(jTextFieldCoorY.getText()), jTextFieldNombreV.getText());
+        grafo = new Grafo();
+        grafo.insertarVertice(Integer.parseInt(jTextFieldCoorX.getText()), Integer.parseInt(jTextFieldCoorY.getText()), jTextFieldNombreV.getText());
+        reiniciar();
     }//GEN-LAST:event_botonNuevoActionPerformed
 
+    private void reiniciar(){
+        jTextFieldCoorX.setText("");
+        jTextFieldCoorY.setText("");
+        jTextFieldNombreV.setText("");
+    }
     /**
      * @param args the command line arguments
      */
