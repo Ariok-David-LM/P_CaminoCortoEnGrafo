@@ -9,10 +9,12 @@ import ico.algoritmos.Dijkstra;
 import ico.elementos.Arista;
 import ico.elementos.Grafo;
 import ico.elementos.Vertice;
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -34,6 +36,43 @@ public class inicio extends javax.swing.JFrame {
         enablePanelVertice(false);
         enablePanelArista(false);
         enablePanelCalcular(false);
+
+    }
+    
+    public void paint(Graphics g){
+        super.paint(g);
+        g.setColor(Color.BLACK);
+        ((Graphics2D) g).setStroke(new BasicStroke(3));
+        g.drawLine(355, 40, 355, 740);
+        g.drawLine(355, 740, 1045, 740);
+        g.setColor(Color.RED);
+        int punto = 40;
+        for (int i = 1; i <= 10; i++) {  
+            g.drawLine(350, punto, 360, punto);
+            punto = punto + 70;
+        }
+        punto = 415;
+        for (int i = 1; i <= 10; i++) {
+            g.drawLine(punto, 735, punto, 745);
+            punto = punto + 70;
+        }
+        g.setColor(Color.BLACK);
+        Font fuente = new Font("Arial", Font.BOLD, 11);
+        g.setFont(fuente);
+        punto = 43;
+        int num = 100;
+        for (int i = 1; i <= 10; i++) {
+            g.drawString(""+num,330,punto);
+            punto = punto + 70;
+            num = num - 10;
+        }
+        num = 10;
+        punto = 410;
+        for (int i = 1; i <= 10; i++) {
+            g.drawString(num+"", punto, 760);
+            num = num + 10;
+            punto = punto + 70;
+        }    
     }
 
     @SuppressWarnings("unchecked")
@@ -68,6 +107,9 @@ public class inicio extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel2.setBackground(new java.awt.Color(102, 153, 255));
+        jPanel2.setForeground(new java.awt.Color(255, 255, 255));
+
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jPanel1.setPreferredSize(new java.awt.Dimension(500, 500));
 
@@ -75,11 +117,11 @@ public class inicio extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 698, Short.MAX_VALUE)
+            .addGap(0, 713, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 698, Short.MAX_VALUE)
+            .addGap(0, 713, Short.MAX_VALUE)
         );
 
         botonCrearVertice.setText("Crear vertice");
@@ -119,7 +161,7 @@ public class inicio extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelVerticeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextFieldCoordenadaX)
-                    .addComponent(jTextFieldCoordenadaY, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
+                    .addComponent(jTextFieldCoordenadaY)
                     .addComponent(jTextFieldNombreVertice))
                 .addGap(19, 19, 19))
         );
@@ -171,7 +213,7 @@ public class inicio extends javax.swing.JFrame {
                     .addGroup(jPanelAristaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(botonNewArista)
                         .addComponent(jLabel5)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addGroup(jPanelAristaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(comboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -261,27 +303,29 @@ public class inicio extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(botonCrearVertice)
-                            .addComponent(jPanelVertice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(botonCrearArista)
-                            .addComponent(jButton3)
-                            .addComponent(jPanelArista, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(jPanelCalcular, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(353, 353, 353))
+                        .addContainerGap()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(botonCrearArista, javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(jButton3, javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(jPanelArista, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanelVertice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanelCalcular, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(108, 108, 108)
+                        .addComponent(botonCrearVertice)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 715, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
+                        .addGap(11, 11, 11)
                         .addComponent(botonCrearVertice, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanelVertice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -293,28 +337,24 @@ public class inicio extends javax.swing.JFrame {
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanelCalcular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 715, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 1048, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-  
+
     private void enablePanelVertice(boolean act) {
         for (Component componente : jPanelVertice.getComponents()) {
             componente.setEnabled(act);
@@ -360,7 +400,7 @@ public class inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_botonCrearAristaActionPerformed
 
     private void botonNewAristaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonNewAristaActionPerformed
-        grafo.insertarArista((String)comboBoxInicio.getSelectedItem(),(String)comboBoxFin.getSelectedItem());
+        grafo.insertarArista((String) comboBoxInicio.getSelectedItem(), (String) comboBoxFin.getSelectedItem());
         ArrayList<Vertice> vertices = grafo.getVertices();
         int x1 = 0;
         int y1 = 0;
@@ -376,17 +416,16 @@ public class inicio extends javax.swing.JFrame {
                 y2 = vertice.getEjey() * 7;
             }
         }
-        pintarArista(jPanel1.getGraphics(), x1, y1, x2, y2,Color.RED);
+        pintarArista(jPanel1.getGraphics(), x1, y1, x2, y2, Color.blue);
         enablePanelArista(false);
         comboBox.setSelectedIndex(0);
         comboBox1.setSelectedIndex(0);
     }//GEN-LAST:event_botonNewAristaActionPerformed
 
     private void botonCalculateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCalculateActionPerformed
-        
         ArrayList<Arista> caminoCorto = algoritmo.caminoMasCorto(grafo, (String) this.comboBoxUbicacionInicial.getSelectedItem(), (String) this.comboBoxUbicacionInicial1.getSelectedItem());
         for (Arista arista : caminoCorto) {
-            pintarCaminito(jPanel1.getGraphics(), arista.getVerticeInicial().getEjex(), arista.getVerticeInicial().getEjey(), arista.getVerticeFinal().getEjex(), arista.getVerticeFinal().getEjey(),caminoCorto);
+            pintarCaminito(jPanel1.getGraphics(), arista.getVerticeInicial().getEjex(), arista.getVerticeInicial().getEjey(), arista.getVerticeFinal().getEjex(), arista.getVerticeFinal().getEjey());
         }
         enablePanelCalcular(false);
     }//GEN-LAST:event_botonCalculateActionPerformed
@@ -434,38 +473,22 @@ public class inicio extends javax.swing.JFrame {
 
     private void pintaVertice(Graphics g, int x, int y, String nombre) {
         g.setColor(Color.RED);
-        g.fillArc(x, -y+700, 6, 6, 0, 360);
+        g.fillArc(x, -y + 700, 6, 6, 0, 360);
         g.setColor(Color.DARK_GRAY);
         Font fuente = new Font("Arial", Font.BOLD, 14);
         g.setFont(fuente);
-        g.drawString(nombre, x, -y+700);
+        g.drawString(nombre, x, -y + 700);
     }
 
-    private void pintarArista(Graphics g, int x1, int y1, int x2, int y2,Color color) {
+    private void pintarArista(Graphics g, int x1, int y1, int x2, int y2, Color color) {
         g.setColor(color);
-        g.drawLine(x1, -y1+700, x2, -y2+700);
+        g.drawLine(x1, -y1 + 700, x2, -y2 + 700);
     }
-    
-    private void pintarCaminito(Graphics g, int x1, int y1, int x2, int y2,ArrayList<Arista> x) {
-        ArrayList<Vertice> vertices = grafo.getVertices();
-        ArrayList<Arista> aristas = grafo.getAristas();
-        jPanel1.update(g);
-        for (Vertice vertice : vertices) {
-            pintaVertice(jPanel1.getGraphics(),vertice.getEjex()*7,vertice.getEjey()*7,vertice.getNombreV());
-        }
-        for (Arista arista : x) {
-            pintarArista(jPanel1.getGraphics(),arista.getVerticeInicial().getEjex()*7,arista.getVerticeInicial().getEjey()*7,arista.getVerticeFinal().getEjex()*7, arista.getVerticeFinal().getEjey()*7,Color.GREEN);
-        }
-        /*for (Arista arista : aristas) {
-            pintarArista(jPanel1.getGraphics(),arista.getVerticeInicial().getEjex()*7,arista.getVerticeInicial().getEjey()*7,arista.getVerticeFinal().getEjex()*7, arista.getVerticeFinal().getEjey()*7,Color.red);
-        }*/
-        g.setColor(Color.BLACK);
-        g.drawLine(x1*7, (-y1+700)*7, x2*7, (-y2+700)*7);
- 
-    }
-    
-    
 
+    private void pintarCaminito(Graphics g, int x1, int y1, int x2, int y2) {
+        ((Graphics2D) g).setStroke(new BasicStroke(3));
+        pintarArista(g, x1 * 7, y1 * 7, x2 * 7, y2 * 7, Color.GREEN);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonCalculate;
