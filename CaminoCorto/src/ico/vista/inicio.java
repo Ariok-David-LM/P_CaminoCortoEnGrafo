@@ -106,6 +106,7 @@ public class inicio extends javax.swing.JFrame {
         comboBoxUbicacionInicial1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jPanel2.setBackground(new java.awt.Color(102, 153, 255));
         jPanel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -117,11 +118,11 @@ public class inicio extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 713, Short.MAX_VALUE)
+            .addGap(0, 711, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 713, Short.MAX_VALUE)
+            .addGap(0, 710, Short.MAX_VALUE)
         );
 
         botonCrearVertice.setText("Crear vertice");
