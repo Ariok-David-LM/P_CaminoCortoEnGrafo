@@ -19,15 +19,13 @@ public class Dijkstra {
 
     public Dijkstra() {
     }
-    
-    public ArrayList<Etiquetas> etiquetarVertices(Grafo grafotmp, String verticeInicial){
+
+    public ArrayList<Etiquetas> etiquetarVertices(Grafo grafotmp, String verticeInicial) {
         ArrayList<Vertice> vertices = grafotmp.getVertices();
         ArrayList<Arista> aristas = grafotmp.getAristas();
         ArrayList<Etiquetas> etiquetas = new ArrayList<>();
         Etiquetas actual = new Etiquetas();
-        
         if (grafotmp.existeNombreVertice(verticeInicial)) {
-            
             for (Vertice verti : vertices) {
                 Etiquetas tmpEti = null;
                 if (verti.getNombreV().equals(verticeInicial)) {
@@ -38,79 +36,112 @@ public class Dijkstra {
                 }
                 etiquetas.add(tmpEti);
             }
-            
-            /*Inicia algoritmo de Dijkstra*/
-            
-            Etiquetas actualEvaluando = null;
-            int contador = 0;
+
+            /*Inicia algoritmo*/
+            int contador = 0; //Contador del do while
             Etiquetas mayor = null;
             Etiquetas menor = null;
-            do {                
-                if (actualEvaluando == null) {
-                    actualEvaluando = actual;
-                }
-                
-                ArrayList<Arista> relacionadas = aristasRelacionadas(aristas, actualEvaluando.getVerticeActual().getNombreV());
-                
-                for (Arista relacionado : relacionadas) {
-                    
-                    String opuesto = relacionado.getVerticeOpuesto(actualEvaluando.getVerticeActual().getNombreV());
-                    
-                    for (Etiquetas eti : etiquetas) {
-                        
-                        if (eti.getVerticeActual().getNombreV().equals(opuesto)) {
-                            
-                            if (!eti.isNodoEvaluado()) {
-                                
-                                if (eti.getDistanciaAcumulada() == -1) {
-                                    eti.setDistanciaAcumulada(0);
-                                    eti.setDistanciaAcumulada(actualEvaluando.getDistanciaAcumulada() + relacionado.getValorArista());
-                                    eti.setVerticeAnterior(actualEvaluando.getVerticeActual());
-                                } else {
-                                    
-                                    if (eti.getDistanciaAcumulada()>= (actualEvaluando.getDistanciaAcumulada() + relacionado.getValorArista())) {
-                                        eti.setDistanciaAcumulada(actualEvaluando.getDistanciaAcumulada() + relacionado.getValorArista());
-                                        eti.setVerticeAnterior(actualEvaluando.getVerticeActual());
-                                    }
+            do {
+                ArrayList<Arista> aristasRelacionadas = aristasRelacionadas(aristas, actual.getVerticeActual().getNombreV());
+                int contador2 = 0;//Contador de etiquetas relacionadas
+                for (Arista aristasRelacionada : aristasRelacionadas) {
+                    String etiquetaOpuesta = aristasRelacionada.getVerticeOpuesto(actual.getVerticeActual().getNombreV());
+                    for (Etiquetas etiqueta : etiquetas) {
+                        if (etiqueta.getVerticeActual().getNombreV().equals(etiquetaOpuesta)) {
+                            if (!etiqueta.isNodoEvaluado()) {
+                                if (etiqueta.getDistanciaAcumulada() == -1) {
+                                    etiqueta.setDistanciaAcumulada(actual.getDistanciaAcumulada() + aristasRelacionada.getValorArista() + 1);
+                                    etiqueta.setVerticeAnterior(actual.getVerticeActual());
+                                } else if (etiqueta.getDistanciaAcumulada() >= actual.getDistanciaAcumulada() + aristasRelacionada.getValorArista()) {
+                                    etiqueta.setDistanciaAcumulada(actual.getDistanciaAcumulada() + aristasRelacionada.getValorArista());
+                                    etiqueta.setVerticeAnterior(actual.getVerticeActual());
                                 }
+                                contador2 = contador2 + 1;
                             }
                         }
                     }
                 }
-                
-               /**/
-                
-                for (Etiquetas etique : etiquetas) {
-                    if (etique.getVerticeActual() != etique.getVerticeAnterior() && !etique.isNodoEvaluado()) {
-                        if (mayor == null) {
-                            mayor = etique;
-                        } else if (menor == null) {
-                            menor = etique;
-                        } else {
-                            
-                            if (menor.isNodoEvaluado()) {
-                                menor = mayor;
-                                mayor = etique;
-                            } else if (mayor.isNodoEvaluado()) {
-                                mayor = menor;
-                                menor = etique;
-                            }
-                            
-                            if (menor.getDistanciaAcumulada() > mayor.getDistanciaAcumulada()) {
-                                menor = mayor;
-                             
-                            }
-                            mayor = etique;
+                if (contador2 == 1 && aristasRelacionadas.size() == 1) {
+                    String tmp = aristasRelacionadas.get(0).getVerticeOpuesto(actual.getVerticeActual().getNombreV());
+                    for (Etiquetas etiqueta : etiquetas) {
+                        if (etiqueta.getVerticeActual().getNombreV().equals(tmp)) {
+                            etiqueta.setNodoEvaluado(true);
+                            actual = etiqueta;
                         }
                     }
-                }
-                
-                for (Etiquetas etiqu : etiquetas) {
-                    if (menor.getVerticeActual().getNombreV().equals(etiqu.getVerticeActual().getNombreV())) {
-                        etiqu.setNodoEvaluado(true);
+                } else if (contador2 == 1 && aristasRelacionadas.size() != 1) {
+                    for (Arista aristasRelacionada : aristasRelacionadas) {
+                        String tmp = aristasRelacionada.getVerticeOpuesto(actual.getVerticeActual().getNombreV());
+                        for (Etiquetas etiqueta : etiquetas) {
+                            if (etiqueta.getVerticeActual().getNombreV().equals(tmp) && !etiqueta.isNodoEvaluado()) {
+                                etiqueta.setNodoEvaluado(true);
+                                actual = etiqueta;
+                            }
+                        }
                     }
+                } else if (contador2 > 1) {
+                    for (Etiquetas etiqueta : etiquetas) {
+                        if (etiqueta.getVerticeActual() != etiqueta.getVerticeAnterior() && !etiqueta.isNodoEvaluado()) {
+                            if (mayor == null) {
+                                mayor = etiqueta;
+                            } else if (menor == null) {
+                                menor = etiqueta;
+                            } else {
+                                if (menor.isNodoEvaluado()) {
+                                    menor = mayor;
+                                    mayor = etiqueta;
+                                } else if (mayor.isNodoEvaluado()) {
+                                    mayor = menor;
+                                    menor = etiqueta;
+                                }
+                                if (menor.getDistanciaAcumulada() > mayor.getDistanciaAcumulada()) {
+                                    menor = mayor;
+                                }
+                                mayor = etiqueta;
+                            }
+                        }
+                    }
+                    for (Etiquetas etiqu : etiquetas) {
+                        if (menor.getVerticeActual().getNombreV().equals(etiqu.getVerticeActual().getNombreV())) {
+                            etiqu.setNodoEvaluado(true);
+                        }
+                    }
+                    actual = menor;
+                } else if (contador2 == 0) {
+                    for (Etiquetas etiqueta : etiquetas) {
+                        if (etiqueta.getVerticeActual().getNombreV().equals(actual.getVerticeActual().getNombreV())) {
+                            etiqueta.setNodoEvaluado(true);
+                        }
+                    }
+                    for (Etiquetas etiqueta : etiquetas) {
+                        if (etiqueta.getVerticeActual() != etiqueta.getVerticeAnterior() && !etiqueta.isNodoEvaluado()) {
+                            if (mayor == null) {
+                                mayor = etiqueta;
+                            } else if (menor == null) {
+                                menor = etiqueta;
+                            } else {
+                                if (menor.isNodoEvaluado()) {
+                                    menor = mayor;
+                                    mayor = etiqueta;
+                                } else if (mayor.isNodoEvaluado()) {
+                                    mayor = menor;
+                                    menor = etiqueta;
+                                }
+                                if (menor.getDistanciaAcumulada() > mayor.getDistanciaAcumulada()) {
+                                    menor = mayor;
+                                }
+                                mayor = etiqueta;
+                            }
+                        }
+                    }
+                    for (Etiquetas etiqu : etiquetas) {
+                        if (menor.getVerticeActual().getNombreV().equals(etiqu.getVerticeActual().getNombreV())) {
+                            etiqu.setNodoEvaluado(true);
+                        }
+                    }
+                    actual = menor;
                 }
-                actualEvaluando = menor;
+                System.out.println(actual.getVerticeActual().getNombreV());
                 contador = contador + 1;
             } while (contador <= etiquetas.size());
         } else {
@@ -118,25 +149,24 @@ public class Dijkstra {
         }
         return etiquetas;
     }
-    
-    
-    private ArrayList<Arista> aristasRelacionadas(ArrayList<Arista> aristas, String vertice){
+
+    private ArrayList<Arista> aristasRelacionadas(ArrayList<Arista> aristas, String vertice) {
         ArrayList<Arista> relacionadas = new ArrayList<>();
-        for (Arista arista : aristas ) {
+        for (Arista arista : aristas) {
             if (arista.existeVertice(vertice)) {
                 relacionadas.add(arista);
             }
         }
         return relacionadas;
     }
-    
-    public ArrayList<Arista> caminoMasCorto (Grafo g, String vertiI, String vertiF){
+
+    public ArrayList<Arista> caminoMasCorto(Grafo g, String vertiI, String vertiF) {
         ArrayList<Etiquetas> eti = etiquetarVertices(g, vertiI);
         ArrayList<Arista> aristasTotales = g.getAristas();
         ArrayList<Arista> camino = new ArrayList<>();
         String seleccionado = vertiF;
         int contador = 0;
-        do {            
+        do {
             for (Etiquetas etiq : eti) {
                 if (etiq.getVerticeActual().getNombreV().equals(seleccionado)) {
                     Arista tmp = obtenerArista(aristasTotales, etiq.getVerticeActual().getNombreV(), etiq.getVerticeAnterior().getNombreV());
@@ -148,11 +178,11 @@ public class Dijkstra {
             if (seleccionado.equals(vertiI)) {
                 contador = 1000;
             }
-        } while (contador <= eti.size());
+        } while (contador < eti.size());
         return camino;
     }
-    
-    private Arista obtenerArista(ArrayList<Arista> arris, String ini, String fin){
+
+    private Arista obtenerArista(ArrayList<Arista> arris, String ini, String fin) {
         Arista arista = null;
         for (Arista arri : arris) {
             if (arri.existeVertice(ini) && arri.existeVertice(fin)) {

@@ -21,7 +21,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Los dioses osvaldo y ariok
+ * @author Osvaldo, Julio y Ariok
  */
 public class inicio extends javax.swing.JFrame {
 

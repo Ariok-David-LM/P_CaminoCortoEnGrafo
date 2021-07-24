@@ -7,7 +7,7 @@ package ico.elementos;
 
 /**
  *
- * @author Ariok León
+ * @author Osvaldo, Julio y Ariok
  */
 public class Arista {
     

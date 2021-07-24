@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Ariok León
+ * @author Osvaldo, Julio y Ariok
  */
 public class Grafo {
 
